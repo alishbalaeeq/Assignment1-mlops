@@ -14,7 +14,9 @@ class KMeanClustering:
         rnd = np.random.choice(X.shape[0], self.k, replace=False)
         self.meanPoints = X[rnd, :]
         previousMean = np.zeros((self.k, X.shape[1]))
-        while (np.array_equal(previousMean, self.meanPoints) == False):
+        if not np.array_equal(previousMean, self.meanPoints):
+            check = True
+        while check:
             dist = np.zeros((self.k, X.shape[0]))
             for idx, val in enumerate(self.meanPoints):
                 dist[idx] = np.sum((X - val) ** 2, axis=1)
@@ -22,6 +24,8 @@ class KMeanClustering:
             previousMean = deepcopy(self.meanPoints)
             for i in range(self.k):
                 self.meanPoints[i, :] = np.mean(X[Y == i], axis=0)
+            if not np.array_equal(previousMean, self.meanPoints):
+                check = True
         print(self.meanPoints)
         return
 
