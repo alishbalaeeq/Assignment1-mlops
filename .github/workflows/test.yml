@@ -20,7 +20,7 @@ jobs:
       run: pip install -r requirements.txt
 
     - name: Run Unit Tests
-      run: pytest testCases.py 
+      run: python testCases.py 
           
     - name: Merge to Master (if tests pass)
       if: success()
