@@ -26,6 +26,7 @@ class KMeanClustering:
                 self.meanPoints[i, :] = np.mean(X[Y == i], axis=0)
             if not np.array_equal(previousMean, self.meanPoints):
                 check = True
+                a = 1
         print(self.meanPoints)
         return
 
