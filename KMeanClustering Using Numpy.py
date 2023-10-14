@@ -43,5 +43,5 @@ if __name__=="__main__":
     kmean.train(Xtr)
 
     pred = kmean.predict(xts)
-    acc = np.sum(pred == yts) / float(yts.shape[0]
+    acc = np.sum(pred == yts) / float(yts.shape[0])
     print("Accuracy on testing data:", acc)
