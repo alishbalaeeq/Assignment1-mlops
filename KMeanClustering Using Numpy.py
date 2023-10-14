@@ -10,7 +10,8 @@ class KMeanClustering:
         return
 
     def train(self, X):
-        self.meanPoints=X[np.random.choice(X.shape[0],self.k,replace=False),:]
+        rnd=np.random.choice(X.shape[0], self.k, replace=False)
+        self.meanPoints = X[rnd, :]
         previousMean = np.zeros((self.k, X.shape[1]))
         while ((np.array_equal(previousMean, self.meanPoints)) != True):
             dist = np.zeros((self.k, X.shape[0]))
@@ -20,7 +21,7 @@ class KMeanClustering:
             previousMean = deepcopy(self.meanPoints)
             for i in range(self.k):
                 self.meanPoints[i, :] = np.mean(X[Y == i], axis=0)
-        # print(self.meanPoints)
+        print(self.meanPoints)
         return
 
     def predict(self, X):
@@ -36,9 +37,11 @@ if __name__=="__main__":
     Y[Y == 'Iris-setosa'] = 0
     Y[Y == 'Iris-virginica'] = 1
     Y[Y == 'Iris-versicolor'] = 2
-    Xtr,xts,ytr,yts=train_test_split(X,Y,test_size=0.33, random_state=42)
+    data_S = train_test_split(X, Y, test_size=0.33, random_state=42)
+    Xtr, xts, ytr, yts = data_S
     kmean = KMeanClustering(k=3)
     kmean.train(Xtr)
-    print("Training Completed!\n")
+
     pred = kmean.predict(xts)
-    print("Accuracy on testing data:",np.sum(pred==yts)/float(yts.shape[0]))
+    acc = np.sum(pred == yts) / float(yts.shape[0]
+    print("Accuracy on testing data:", acc)
