@@ -26,4 +26,3 @@ jobs:
           git fetch origin dev
           git checkout test
           git merge ${{ github.event.pull_request.head.ref }}
-          git push origin test
