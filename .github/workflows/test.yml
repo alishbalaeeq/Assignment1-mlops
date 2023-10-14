@@ -1,7 +1,7 @@
 name: Unit Testing
 
 on:
-  push:
+  pull_request:
     branches:
       - test
 
@@ -13,8 +13,19 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
+      with:
+        ref: dev
+        
     - name: Install dependencies
       run: pip install -r requirements.txt
 
     - name: Run Unit Tests
       run: pytest testCases.py 
+          
+    - name: Merge to Master (if tests pass)
+      if: success()
+      run: |
+        git fetch origin test
+        git checkout main
+        git merge ${{ github.event.pull_request.head.ref }}
+        git push origin main

@@ -13,6 +13,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+        with:
+          ref: dev
     
       - name: Install dependencies
         run: pip install flake8
@@ -23,6 +25,6 @@ jobs:
       - name: Merge to Test
         if: success()
         run: |
-          git fetch origin
+          git fetch origin dev
           git checkout test
           git merge ${{ github.event.pull_request.head.ref }}
