@@ -6,14 +6,15 @@ from copy import deepcopy
 
 class KMeanClustering:
     def __init__(self, k=3):
+        self.meanPoints = None
         self.k = k
         return
 
     def train(self, X):
-        rnd=np.random.choice(X.shape[0], self.k, replace=False)
+        rnd = np.random.choice(X.shape[0], self.k, replace=False)
         self.meanPoints = X[rnd, :]
         previousMean = np.zeros((self.k, X.shape[1]))
-        while ((np.array_equal(previousMean, self.meanPoints)) != True):
+        while (np.array_equal(previousMean, self.meanPoints) == False):
             dist = np.zeros((self.k, X.shape[0]))
             for idx, val in enumerate(self.meanPoints):
                 dist[idx] = np.sum((X - val) ** 2, axis=1)
@@ -30,7 +31,8 @@ class KMeanClustering:
             dist[idx] = np.sum((X - val) ** 2, axis=1)
         return np.argmin(dist, axis=0)
 
-if __name__=="__main__":
+
+if __name__ == "__main__":
     data = pd.read_csv('iris.data', names=['PL', 'PW', 'SL', 'SW', 'C'])
     X = np.asarray(data.drop(['C'], axis=1))
     Y = np.asarray(data['C'])
