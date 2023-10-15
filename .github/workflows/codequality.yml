@@ -21,10 +21,3 @@ jobs:
     
       - name: Run Flake8
         run: flake8
-
-      - name: Merge to Test
-        if: success()
-        run: |
-          git fetch origin dev
-          git checkout test
-          git merge ${{ github.event.pull_request.head.ref }}
