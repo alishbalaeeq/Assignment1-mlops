@@ -16,3 +16,6 @@ jobs:
         
     - name: Install dependencies
       run: pip install -r requirements.txt
+
+    - name: Run Unit Tests
+      run: python3 test_cases.py
