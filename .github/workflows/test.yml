@@ -23,4 +23,4 @@ jobs:
       run: pip install -r requirements.txt
 
     - name: Run Unit Tests
-      run: python test_cases.py
+      run: python3 test_cases.py
