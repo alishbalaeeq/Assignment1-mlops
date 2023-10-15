@@ -1,0 +1,28 @@
+name: Code Quality Check
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  code-quality:
+    name: Check Code Quality
+    runs-on: ubuntu-latest
+  
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+    
+      - name: Install dependencies
+        run: pip install flake8
+    
+      - name: Run Flake8
+        run: flake8
+
+      - name: Merge to Test
+        if: success()
+        run: |
+          git fetch origin
+          git checkout test
+          git merge ${{ github.event.pull_request.head.ref }}
