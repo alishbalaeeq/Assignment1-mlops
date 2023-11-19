@@ -8,7 +8,6 @@ class KMeanClustering:
     def __init__(self, k=3):
         self.meanPoints = None
         self.k = k
-        self.name = 'KMean Clustering'
         return
 
     def train(self, X):
