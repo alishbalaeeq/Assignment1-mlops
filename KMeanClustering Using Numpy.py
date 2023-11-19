@@ -2,6 +2,8 @@ import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
 from copy import deepcopy
+
+
 class KMeanClustering:
     def __init__(self, k=3):
         self.meanPoints = None
