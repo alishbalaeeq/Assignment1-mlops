@@ -8,6 +8,7 @@ class KMeanClustering:
     def __init__(self, k=3):
         self.meanPoints = None
         self.k = k
+        self.name = 'Fork KM'
         return
 
     def train(self, X):
